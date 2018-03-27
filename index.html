@@ -1,0 +1,40 @@
+<canvas id="viewport" width="664px" height="664px"></canvas>
+<img id="myimg" src="">
+<script>
+let canvas = document.getElementById('viewport'),
+img = document.getElementById('myimg'),
+context = canvas.getContext('2d');
+make_base();
+function make_base()
+{
+  img = new Image();
+  img.src ="challenge_strider.png";
+  img.crossOrigin = "Anonymous";
+  img.onload = function(){
+      context.drawImage( img, 0, 0 );
+
+      countPixels();
+  }
+}
+function countPixels(){
+    canvas.width = img.width;
+  	canvas.height = img.height;
+    context.drawImage( img, 0, 0 );
+   let imageData = context.getImageData(0,0,img.width,img.height);
+    (pixels = imageData.data), (numPixels = imageData.width * imageData.height);
+
+  let count = 0;
+  for ( let i = 0; i < numPixels; i++ ) {
+      let r = pixels[ i * 4 ],
+          g = pixels[ i * 4 + 1 ],
+          b = pixels[ i * 4 + 2 ];
+
+        if(r == 255 && g == 0 && b == 0){
+          count++;
+        }
+  }
+  alert("O numero de pixels vermelhos :"+count);
+}
+
+
+</script>

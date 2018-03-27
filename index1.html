@@ -1,0 +1,52 @@
+<meta charset="UTF-8">
+
+<canvas id="viewport" width="664px" height="664px">
+	<img id="myimg" src="">
+</canvas>
+<script>
+
+var canvas = document.getElementById('viewport'),
+img = document.getElementById('myimg'),
+context = canvas.getContext('2d');
+
+loadPicture();
+make_base();
+
+function loadPicture() {
+    img.src = 'img/challenge_strider.png';
+    img.onload = function () {
+        context.drawImage( img, 0, 0 );
+    }
+};
+
+function make_base(){
+
+	canvas.width = img.width;
+  canvas.height = img.height;
+  context.drawImage( img, 0, 0 );
+
+	var imageData = context.getImageData(0,0,img.width,img.height),
+     pixels = imageData.data,
+     numPixels = imageData.width * imageData.height;
+
+
+
+ 	var count = 0;
+	for ( var i = 0; i < numPixels; i++ ) {
+	    var r = pixels[ i * 4 ],
+	        g = pixels[ i * 4 + 1 ],
+	        b = pixels[ i * 4 + 2 ];
+
+        if(r == 255 && g == 0 && b == 0){
+        	count++;
+        }
+	}
+
+	alert(count);
+}
+
+
+
+
+
+</script>
